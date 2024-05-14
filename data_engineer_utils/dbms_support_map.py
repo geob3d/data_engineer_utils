@@ -66,6 +66,20 @@ def get_dbms_by_py_driver(driver_name) -> str:
 
 
 def get_upsert_type_by_dbms(dbms_name: str) -> str:
+    """
+    Finds the upsert type based on the given DBMS name.
+
+    Args:
+        dbms_name (str): The name of the DBMS to search for.
+
+    Returns:
+        str: The upsert type for the given DBMS.
+
+    Raises:
+        ValueError: If the dbms_name is not found in the configuration
+                    or if the upsert type is not defined for the given DBMS.
+    """
+
     dbms_config = sqlalchemy_drivers_merge_systems.get(dbms_name)
 
     if dbms_config is None:
