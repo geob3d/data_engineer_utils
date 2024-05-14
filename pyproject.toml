@@ -12,6 +12,7 @@ icontract = "^2.6.6"
 loguru = "^0.7.2"
 pydantic = "^2.7"
 python = "^3.11"
+sqlalchemy = "^2.0.30"
 
 
 [tool.poetry.group.test.dependencies]
