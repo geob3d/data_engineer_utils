@@ -77,6 +77,3 @@ def get_upsert_type_by_dbms(dbms_name: str) -> str:
         raise ValueError(f"Upsert type for DBMS '{dbms_name}' is not defined.")
 
     return upsert_type
-
-
-print(get_upsert_type_by_dbms('postgresql'))
