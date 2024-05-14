@@ -10,10 +10,7 @@ sqlalchemy_drivers_merge_systems = {
             "postgresql+pygresql",
             "postgresql+psycopg",
         ],
-        "upsert_type": {
-            "default": "ON CONFLICT",  # For versions before 15
-            "15+": "MERGE",  # For versions 15 and above
-        },
+        "upsert_type": "ON CONFLICT",  # For versions before 15 # For versions 15 and abov
     },
     "mysql": {
         "drivers": [
@@ -66,3 +63,20 @@ def get_dbms_by_py_driver(driver_name) -> str:
         raise ValueError(f"The target value {driver_name} is not found in any DBMS drivers.")
 
     return dbms_key
+
+
+def get_upsert_type_by_dbms(dbms_name: str) -> str:
+    dbms_config = sqlalchemy_drivers_merge_systems.get(dbms_name)
+
+    if dbms_config is None:
+        raise ValueError(f"DBMS '{dbms_name}' is not found in the configuration.")
+
+    upsert_type = dbms_config.get('upsert_type')
+
+    if upsert_type is None:
+        raise ValueError(f"Upsert type for DBMS '{dbms_name}' is not defined.")
+
+    return upsert_type
+
+
+print(get_upsert_type_by_dbms('postgresql'))
